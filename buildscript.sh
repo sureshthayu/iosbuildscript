@@ -18,5 +18,12 @@ then
   exit 1
 fi
 
+
+echo Generating IPA
+
 xcodebuild -exportArchive -archivePath  "${BUILD_DIR}/${PROJECT_NAME}".xcarchive -exportOptionsPlist ExportOptionList.plist -exportPath  "${BUILD_DIR}"
 
+
+echo Pushing to FB App distribution
+
+firebase appdistribution:distribute "${BUILD_DIR}/${PROJECT_NAME}".ipa --app "FB APP ID" --groups test_group #--token "FB_TOKEN_REFREESH"
